@@ -1,0 +1,29 @@
+/* .box {
+    width: 100px;
+    height: 100px;
+    background-color: beige;
+    display: inline-block;
+    text-align: center;
+    line-height: 100px;
+    display: none;
+}
+
+.flex {
+    display: flex;
+}
+
+.btn {
+    width: 100px;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    background-color: orange;
+    margin-top: 20px;
+    border-radius: 5px;
+} */
+
+.post {
+    width: 100px;
+    height: 100px;
+    background-color: beige;
+}
