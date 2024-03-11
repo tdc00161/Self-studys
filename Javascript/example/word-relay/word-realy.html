@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>끝말잇기</title>
+</head>
+
+<body>
+  <!-- Tip Shift+Alt+↑↓ : 복사 -->
+  <div><span id="order">1</span>번째 참가자</div>
+  <div>제시어: <span id="word">1</span></div>
+  <input type="text" name="" id="">
+  <button>입력</button>
+  <script>
+    const number = Number(prompt('몇 명이 참가하나요?'));
+    const $button = document.querySelector('button');
+    const $input = document.querySelector('input');
+    const $word = document.querySelector('#word');
+    const $order = document.querySelector('#order');
+    let word; //제시어
+    let newWord; // 새로 입력한 단어
+
+    const onClickButton = () => {
+      if(!word || word[word.length -1] === newWord[0]) {// 제시어가 비어 있는가?
+        // 비어 있다.
+        word = newWord; //입력한 단어가 제시어가 된다.
+        $word.textContent = word;
+        const order = Number($order.textContent); // 현재 순서
+        if(order + 1 > number) {
+          $order.textContent = 1;
+          // textContent 는 형태변환이 자동됨
+        } else {
+          $order.textContent = order + 1;
+        }
+      } else {// 올바르지 않은가
+          alert('올바르지 않은 단어입니디!');
+      }
+      $input.value = '';
+      // 커서 적용
+      $input.focus();
+    };
+    const onInput = (event) => {
+      newWord = event.target.value;
+    };
+
+    $button.addEventListener('click', onClickButton);
+    $input.addEventListener('input', onInput);
+
+
+    // // 사용자로부터 값을 받음
+    // const number = parseInt(prompt('몇 명이 참가하나요?'), 10);
+    // // 사용자에게 경고 메시지를 표시
+    // alert(number);
+    // // 사용자로부터 확인 받음
+    // const yesOrNo = confirm('맞나요?');
+    // console.log('number:',number);
+
+    // document.querySelector('input').addEventListener('input', function (event) {
+    //   console.log('글자 입력',event.target.value);
+    // });
+
+    // const onClick = function() {
+    //   console.log('버튼 클릭');
+    // }
+    // document.querySelector('button').addEventListener('click', onClick);
+  </script>
+</body>
+
+</html>

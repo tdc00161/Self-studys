@@ -64,4 +64,50 @@ print(perfect_juice)
 
 # f"" 는 긴 문장에 변수담아 사용하고자 할 때 유용함.
 
+# """주석하고싶은 내용""" 따옴표내에 작성된 값을 무시(주석처리)
+# 한 줄을 주석처리할 때는 # 를 사용
 
+"""안녕하세요"""
+
+# while 반복문
+
+# distance 가 20보다 작을때까지 실행
+distance = 0
+
+while distance < 20:
+   print("I'm running:", distance, "km")
+   distance += 1
+
+# 배열: 안에 인덱스에 대해 변경 가능
+
+list = [1,2,3,4]
+
+# 튜플: 불변성으로 몇 가지 외앤 변경 불가능
+
+tuple = (1,2,3,4)
+
+# 딕셔너리: 키와 값, 변경 가능
+
+player = {
+   'name': 'jin',
+   'age': 12,
+   'alive': True
+}
+
+"""
+숫자 목록, TO-do 목록, 목록 관련은 list or tuple,
+많은 속성들을 가지고 있는 데이터 만들 때는 딕셔너리
+"""
+
+print(player['alive'])
+
+# for 문
+
+websites = ("google.com",
+            "airbnb.com",
+            "twitter.com",
+            "facebook.com"
+          )
+
+for each in websites:
+   print("hello")
