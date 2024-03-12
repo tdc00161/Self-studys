@@ -102,12 +102,44 @@ player = {
 print(player['alive'])
 
 # for 문
+from requests import get
 
 websites = ("google.com",
             "airbnb.com",
-            "twitter.com",
-            "facebook.com"
+            "https://twitter.com",
+            "facebook.com",
+            "https://tiktok.com",
           )
 
-for each in websites:
-   print("hello")
+# for 변수명 in websites:
+for website in websites:
+   if website.startswith("https://"): # startswith는 boolean 으로 전달
+      print("good to go")
+   else:
+      print("we have to fix it")
+      
+# if문은 오직 무언가가 True 인지 False인지만 판단
+
+results = {
+}
+
+for website in websites:
+   if not website.startswith("https://"): # startswith는 boolean 으로 전달
+      # print("we have to fix it")
+      website = f"https://{website}"
+   response = get(website)
+   if response.status_code < 200:
+      results[website] = "Informational response"
+   elif response.status_code < 300:
+      results[website] = "OK"
+   elif response.status_code < 400:
+      results[website] = "Redirect"
+   elif response.status_code < 500:
+      results[website] = "FAILED" 
+   else:
+      results[website] = "ERROR"
+      
+print(results)
+
+
+
