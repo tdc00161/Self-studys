@@ -143,3 +143,23 @@ print(results)
 
 
 
+# OOP 
+# method: class안에 있는 함수
+# class 안의 method에서 출력하는 첫번째 argument는 뭘 적더라도 자기 자신을 참조
+class Puppy:
+   def __init__(self, name, breed): 
+      self.name = name
+      self.age = 0.1
+      self.breed = breed
+
+ruffus = Puppy(
+   "Ruffus",
+   "Beagle",
+)
+bibl = Puppy(
+   "Bibi",
+   "Dalmatian"
+)
+
+print(ruffus.name, bibl.name)
+
