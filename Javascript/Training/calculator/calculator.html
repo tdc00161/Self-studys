@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="calculator.css">
+    <title>calculator</title>
+</head>
+<body>
+    <input readonly id="Operator">
+    <input readonly type="number" id="result">
+    <div>
+        <button id="int_7">7</button>
+        <button id="int_8">8</button>
+        <button id="int_9">9</button>
+        <button id="divide">/</button>
+    </div>
+    <div>
+        <button id="int_4">4</button>
+        <button id="int_5">5</button>
+        <button id="int_6">6</button>
+        <button id="multiply">x</button>
+    </div>
+    <div>
+        <button id="int_1">1</button>
+        <button id="int_2">2</button>
+        <button id="int_3">3</button>
+        <button id="minus">-</button>
+    </div>
+    <div>
+        <button id="clear">C</button>
+        <button id="int_0">0</button>
+        <button id="equal">=</button>
+        <button id="plus">+</button>
+    </div>
+
+    <script>
+        let numberOne = '';
+        let Operator = '';
+        let numberTwo = '';
+        const $Operator = document.getElementById('Operator');
+        const $result = document.getElementById('result');
+        // const onClickNumber = (number) => () => { //함수가 함수를 : 고차 함수(high order function)
+        //     if(Operator) { //연산자를 눌렀을 때
+        //         numberTwo += number;
+        //     } else { //연산자를 안 눌렀을 때
+        //         numberOne += number;
+        //     }
+        //     $result.value += number;
+        // }
+        const onClickNumber = (event) => { //함수가 함수를 : 고차 함수(high order function)
+            if(!Operator) { //연산자를 안 눌렀을 때
+                numberOne += event.target.textContent;
+                $result.value += event.target.textContent;
+                return;
+            }
+            //연산자를 눌렀을 때
+            if(!numberTwo) {
+                $result.value = '';
+            }
+            numberTwo += event.target.textContent;
+            $result.value += event.target.textContent;
+        }
+
+        // document.querySelector('#int_0').addEventListener('click', onClickNumber('0'));
+        // document.querySelector('#int_1').addEventListener('click', onClickNumber('1'));
+        // document.querySelector('#int_2').addEventListener('click', onClickNumber('2'));
+        // document.querySelector('#int_3').addEventListener('click', onClickNumber('3'));
+        // document.querySelector('#int_4').addEventListener('click', onClickNumber('4'));
+        // document.querySelector('#int_5').addEventListener('click', onClickNumber('5'));
+        // document.querySelector('#int_6').addEventListener('click', onClickNumber('6'));
+        // document.querySelector('#int_7').addEventListener('click', onClickNumber('7'));
+        // document.querySelector('#int_8').addEventListener('click', onClickNumber('8'));
+        // document.querySelector('#int_9').addEventListener('click', onClickNumber('9'));
+        document.querySelector('#int_0').addEventListener('click', onClickNumber);
+        document.querySelector('#int_1').addEventListener('click', onClickNumber);
+        document.querySelector('#int_2').addEventListener('click', onClickNumber);
+        document.querySelector('#int_3').addEventListener('click', onClickNumber);
+        document.querySelector('#int_4').addEventListener('click', onClickNumber);
+        document.querySelector('#int_5').addEventListener('click', onClickNumber);
+        document.querySelector('#int_6').addEventListener('click', onClickNumber);
+        document.querySelector('#int_7').addEventListener('click', onClickNumber);
+        document.querySelector('#int_8').addEventListener('click', onClickNumber);
+        document.querySelector('#int_9').addEventListener('click', onClickNumber);
+
+        const onClickOperator = (op) => () => { //함수가 함수를 : 고차 함수(high order function)
+            if(numberOne) { //첫번째 값이 있을 때
+                Operator = op;
+                $Operator.value = op;
+            } else { //없을 때
+                alert('숫자를 먼저 입력하세요.');
+            }
+        }
+
+        document.querySelector('#plus').addEventListener('click',onClickOperator('+'));
+        document.querySelector('#minus').addEventListener('click',onClickOperator('-'));
+        document.querySelector('#multiply').addEventListener('click',onClickOperator('*'));
+        document.querySelector('#divide').addEventListener('click',onClickOperator('/'));
+        document.querySelector('#clear').addEventListener('click', () => {
+            numberOne = '';
+            Operator= '';
+            numberTwo = '';
+            $Operator.value = '';
+            $result.value = '';
+        });
+        document.querySelector('#equal').addEventListener('click', () => {
+            if(numberTwo) {
+                switch (Operator) {
+                    case '+':
+                        $result.value = parseInt(numberOne) + parseInt(numberTwo);
+                        break;
+                    case '-':
+                        $result.value = parseInt(numberOne) - parseInt(numberTwo);
+                        break;
+                    case '*':
+                        $result.value = parseInt(numberOne) * parseInt(numberTwo);
+                        break;
+                    case '/':
+                        $result.value = parseInt(numberOne) / parseInt(numberTwo);
+                        break;
+                    default:
+                        break;
+                }
+            } else {
+                alert('숫자를 먼저 입력하세요.');
+            }
+        });
+
+    </script>
+</body>
+</html>
