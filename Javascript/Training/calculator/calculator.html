@@ -84,6 +84,26 @@
         document.querySelector('#int_9').addEventListener('click', onClickNumber);
 
         const onClickOperator = (op) => () => { //함수가 함수를 : 고차 함수(high order function)
+            if(numberTwo) {
+                switch (Operator) {
+                    case '+':
+                        $result.value = parseInt(numberOne) + parseInt(numberTwo);
+                        break;
+                    case '-':
+                        $result.value = parseInt(numberOne) - parseInt(numberTwo);
+                        break;
+                    case '*':
+                        $result.value = parseInt(numberOne) * parseInt(numberTwo);
+                        break;
+                    case '/':
+                        $result.value = parseInt(numberOne) / parseInt(numberTwo);
+                        break;
+                    default:
+                        break;
+                }
+                numberOne = $result.value;
+                numberTwo = '';
+            }
             if(numberOne) { //첫번째 값이 있을 때
                 Operator = op;
                 $Operator.value = op;

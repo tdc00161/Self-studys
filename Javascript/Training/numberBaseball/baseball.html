@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>숫자 야구게임</title>
+</head>
+<body>
+  <form id="form">
+    <input type="text" id="input">
+    <button>확인</button>
+  </form>
+  <div id="logs"></div>
+  <script>
+    const $input = document.getElementById("input");
+    const $logs = document.getElementById("logs");
+    const $form = document.getElementById("form");
+
+    // 배열에 숫자 넣기
+    const numbers = [];
+    for (let n = 1; n <= 9; n += 1) {
+      numbers.push(n);
+    }
+    const answer = [];
+    for (let n = 0; n <= 3; n += 1) { // 네 번 반복
+      const index = Math.floor(Math.random()*(9-n)); // 0~8 정수
+      answer.push(numbers[index]);
+      numbers.splice(index, 1);
+    }
+    // while 반복문
+    // let n = 1;
+    // while(n <= 9) {
+    //   numbers.push(n);
+    //   n++;
+    // }
+
+    console.log(answer);
+    
+    const tries = [];
+    function checkInput(input) { 
+      if (input.length !== 4) { // 길이는 4가 아닌가
+        return alert('4자리 숫자를 입력해 주세요.');
+      }
+      //new Set : 중복이 없는 배열, length 가 아닌 size로 갯수를 계산
+      if (new Set(input).size !== 4) { // 중복된 숫자가 있는가
+        return alert('중복되지 않게 입력해 주세요.');
+      }
+      if (tries.includes(input)) { // 이미 시도한 값은 아닌가
+        return alert('이미 시도한 값입니다.');
+      }
+      return true;
+    } // 검사하는 코드
+
+    // input 태그가 있을 경우 form으로 감싸주어 작성하는 것이 웹 표준에 더 가깝다.
+    $form.addEventListener('submit', (event) => {
+      event.preventDefault(); // 기본 동작 막기
+      console.log('서브밋', event)
+      const value = $input.value;
+      $input.value = '';
+      if(!checkInput(value)) {
+        return;
+      }
+      // 입력값 문제 없음
+      // join : 배열을 문자열로 변환 ex) [3, 1, 4, 6] -> '3146'
+      // join(''): 콤마를 안할 경우 변환된 문자열에 ',' 가 붙음
+      if (answer.join('') === value) { 
+        $logs.textContent = '홈런!';
+        return;
+      }
+      if (tries.length >= 9) {
+        const message = document.createTextNode(`패배! 정답은 ${answer.join('')}`);
+        $logs.appendChild(message);
+        return;
+      }
+      // 몇 스트라이크 몇 볼인지 검사
+      let strike = 0;
+      let ball = 0;
+      for(let i = 0; i<answer.length; i++) {
+        const index = value.indexOf(answer[i]); //indexOf : 특정 문자 위치 찾기
+        //includes: 있다/없다 여부만 확인 가능, indexOf: 있다/없다, 위치까지 확인 가능
+        if (index > -1) { // 일치하는 숫자 발견
+          if (index === i) { // 자릿수도 같음
+            strike += 1;
+          } else { // 숫자만 같음
+            ball += 1;
+          }
+        }
+      }
+      $logs.append(`${value}: ${strike} 스트라이크 ${ball} 볼`, document.createElement('br'));
+      tries.push(value);
+    })
+  </script>
+</body>
+</html>
